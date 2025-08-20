@@ -37,9 +37,18 @@ const promoteToMember = async (id) => {
     }
 }
 
+const addMessage = async (userId, title, message) => {
+    try {
+        await pool.query("INSERT INTO messages(user_id, title, text) VALUES ($1, $2, $3)", [userId, title, message]);
+    } catch (error) {
+        throw new Error (`addMessage: ${error.message}`);
+    }
+};
+
 module.exports = {
     findUserByEmail,
     findUserById,
     addUser,
     promoteToMember,
+    addMessage,
 };
