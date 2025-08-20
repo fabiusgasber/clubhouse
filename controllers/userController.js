@@ -60,7 +60,9 @@ const userRegisterPost = [
     }
 ];
 
-const userMembershipGet = (req, res) => res.render("pages/membership");
+const userMembershipGet = (req, res, next) => {
+    req.isAuthenticated() ? res.render("pages/membership") : res.redirect("/auth/login");
+};
 
 const userMembershipPost = [
     validateMembership,
@@ -81,5 +83,5 @@ module.exports = {
     userRegisterGet,
     userRegisterPost,
     userMembershipGet,
-    userMembershipPost
+    userMembershipPost,
 };

@@ -20,7 +20,16 @@ const addUser = async (formData) => {
     }
 };
 
+const promoteToMember = async (id) => {
+    try {
+        await pool.query("UPDATE users SET status = 'member' WHERE id = $1", [id]);
+    } catch (error) {
+        throw new Error (`promoteToMember: ${error.message}`);
+    }
+}
+
 module.exports = {
     findUserByEmail,
     addUser,
+    promoteToMember,
 };

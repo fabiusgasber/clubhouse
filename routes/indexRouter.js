@@ -4,5 +4,7 @@ const indexController = require("../controllers/indexController.js");
 
 indexRouter.get("/register", indexController.userRegisterGet);
 indexRouter.post("/register", indexController.userRegisterPost);
+indexRouter.get("/membership", indexController.userMembershipGet);
+indexRouter.post("/membership", indexController.userMembershipPost);
 
 module.exports = indexRouter;

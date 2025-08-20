@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubhouse</title>
+</head>
+<body>
+    <%- include("../partials/errors.ejs"); %>
+    <form method="post" action="/membership">
+        <div>
+            <p>Which country won the men's soccer world cup in 2006?</p>
+            <label for="membershipPassword">Submit your answer to become a member: </label>
+            <input type="password" id="membershipPassword" name="membershipPassword" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
