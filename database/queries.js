@@ -45,10 +45,25 @@ const addMessage = async (userId, title, message) => {
     }
 };
 
+const getMessages = async () => {
+    try {
+        const { rows } = await pool.query(
+            `SELECT first_name, last_name, title, text, timestamp 
+            FROM users 
+            JOIN messages ON(users.id=messages.user_id)
+            ORDER BY messages.timestamp DESC;`
+        );
+        return rows;
+    } catch (error) {
+        throw new Error (`getMessages: ${error.message}`);
+    }
+};
+
 module.exports = {
     findUserByEmail,
     findUserById,
     addUser,
     promoteToMember,
     addMessage,
+    getMessages
 };

@@ -1,0 +1,7 @@
+<% messages.forEach(message => { %>
+    <% if(currentUser && currentUser.status === 'member') { %>
+        <%- include('message_member', { message }) %>
+    <% } else { %>
+        <%- include('message_guest', { message }) %>
+   <% } %>
+<% }); %>

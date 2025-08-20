@@ -1,0 +1,16 @@
+<%- include("../partials/head.ejs"); %>
+<body>
+    <%- include("../partials/header.ejs"); %>
+    <% if(currentUser) { %>
+        <h1>Welcome back, <%= currentUser.first_name %> </h1>
+        <a href="/messages/new">Write new message</a>
+        <a href="/user/membership">Become a member</a>
+        <a href="/auth/logout">Log out</a>
+   <% } else { %>
+    <h1>Please <a href="/auth/login">log in</a> or <a href="/user/register">register</a></h1>
+  <% } %>
+  <main>
+    <%- include("../partials/messages.ejs", { messages }); %>
+  </main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<article>
+        <div>
+            <h2><%= message.title %></h2>
+            <span><%= new Date(message.timestamp).toLocaleString() %></span>
+        </div>
+        <div>
+            <p><%= message.first_name %> says: </p>
+            <p><%= message.text %></p>
+        </div>
+        <form method="post" action="/messages/delete/<%= message.id %>">
+            <button type="submit">Delete message</button>
+        </form>
+</article>
