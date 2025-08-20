@@ -6,6 +6,7 @@ const pgSession = require('connect-pg-simple')(session);
 const passport = require("passport");
 const indexRouter = require("./routes/indexRouter.js");
 const authRouter = require("./routes/authRouter.js");
+const userRouter = require("./routes/userRouter.js");
 const pool = require("./database/pool.js");
 
 app.set("views", path.join(__dirname, "views"));
@@ -29,7 +30,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/", indexRouter);
-app.use("/", authRouter);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {

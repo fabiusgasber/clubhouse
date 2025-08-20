@@ -40,7 +40,7 @@ const userLoginGet = (req, res) => res.render("pages/login");
 
 const userLoginPost = (req, res, next) => passport.authenticate("local", {
   successRedirect: "/",
-  failureRedirect: "/login"
+  failureRedirect: "/auth/login"
 })(req, res, next);
 
 const userLogoutGet = (req, res, next) => {
