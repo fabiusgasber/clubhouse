@@ -1,0 +1,12 @@
+<%- include("./errors.ejs") %>
+<form method="post" action="/login">
+    <section>
+        <label for="email">User E-Mail</label>
+        <input type="email" id="email" name="email" min="3" max="50" required>
+    </section>
+    <section>
+        <label for="password">User Password</label>
+        <input type="password" id="password" name="password" min="5" required>
+    </section>
+    <button type="submit">Submit</button>
+</form>

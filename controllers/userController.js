@@ -52,10 +52,10 @@ const userRegisterPost = [
         if(!errors.isEmpty()) return res.status(400).render("pages/register", { errors: errors.array() });
         try {
             await db.addUser(req.body);
-            res.redirect("/");
+            return res.redirect("/user/login");
         } catch (error) {
             console.error("userRegisterPost error:", error);
-            res.status(500).send("Internal server error");
+            return res.status(500).send("Internal server error");
         }
     }
 ];

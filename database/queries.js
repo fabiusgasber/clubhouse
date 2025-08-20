@@ -10,6 +10,15 @@ const findUserByEmail = async (email) => {
     }
 };
 
+const findUserById = async (id) => {
+    try {
+        const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+        return rows[0];
+    } catch (error) {
+        throw new Error (`findUserById: ${error.message}`);
+    }
+};
+
 const addUser = async (formData) => {
     try {
         const { firstName, lastName, email, password } = formData;
@@ -30,6 +39,7 @@ const promoteToMember = async (id) => {
 
 module.exports = {
     findUserByEmail,
+    findUserById,
     addUser,
     promoteToMember,
 };
