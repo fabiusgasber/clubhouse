@@ -1,5 +1,7 @@
 <% messages.forEach(message => { %>
-    <% if(currentUser && currentUser.status === 'member') { %>
+    <% if(currentUser && currentUser.status === 'admin') { %>
+        <%- include('message_admin', { message }) %>
+    <% } else if(currentUser && currentUser.status === 'member') { %>
         <%- include('message_member', { message }) %>
     <% } else { %>
         <%- include('message_guest', { message }) %>

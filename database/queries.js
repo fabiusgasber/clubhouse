@@ -35,7 +35,15 @@ const promoteToMember = async (id) => {
     } catch (error) {
         throw new Error (`promoteToMember: ${error.message}`);
     }
-}
+};
+
+const promoteToAdmin = async (id) => {
+    try {
+        await pool.query("UPDATE users SET status = 'admin' WHERE id = $1", [id]);
+    } catch (error) {
+        throw new Error (`promoteToAdmin: ${error.message}`);
+    }
+};
 
 const addMessage = async (userId, title, message) => {
     try {
@@ -65,5 +73,6 @@ module.exports = {
     addUser,
     promoteToMember,
     addMessage,
-    getMessages
+    getMessages,
+    promoteToAdmin
 };

@@ -1,5 +1,6 @@
 const db = require("../database/queries.js");
 const { body, validationResult } = require("express-validator");
+require("dotenv").config();
 
 const isEmailInUse = async (value) => {
     const user = await db.findUserByEmail(value);
@@ -18,9 +19,14 @@ const isPasswordMatching = async (value, { req }) => {
 };
 
 const isMembershipPassword = (value) => {
-    if(value !== "italy") throw new Error("Wrong answer. Try again.");
+    if(value !== process.env.MEMBER_SECRET) throw new Error("Wrong answer. Try again.");
     return true;
-}
+};
+
+const isAdminPassword = (value) => {
+    if(value !== process.env.ADMIN_SECRET) throw new Error("Wrong answer. Try again.");
+    return true;
+};
 
 const validateUser = [
     body("firstName").trim()
@@ -41,6 +47,10 @@ const validateUser = [
 
 const validateMembership = [
     body("membershipPassword").trim().toLowerCase().custom(isMembershipPassword)
+];
+
+const validateAdmin = [
+    body("adminPassword").trim().custom(isAdminPassword)
 ];
 
 const userRegisterGet = (req, res) => res.render("pages/register");
@@ -79,9 +89,32 @@ const userMembershipPost = [
     }
 ];
 
+const userAdminGet = (req, res) => {
+    if(!req.isAuthenticated()) res.redirect("auth/login");
+    if(req.user.status === "user") res.redirect("/user/membership");
+    res.render("pages/admin");
+};
+
+const userAdminPost = [
+    validateAdmin,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) return res.status(400).render("pages/admin", { errors: errors.array() });
+        try {
+            await db.promoteToAdmin(req.user.id);
+            res.redirect("/");
+        } catch (error) {
+            console.error("userAdminPost:", error);
+            res.status(500).send("Internal server error");
+        }
+    }
+];
+
 module.exports = {
     userRegisterGet,
     userRegisterPost,
     userMembershipGet,
     userMembershipPost,
+    userAdminGet,
+    userAdminPost
 };
