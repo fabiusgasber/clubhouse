@@ -1,32 +1,7 @@
 const db = require("../database/queries.js");
 const { body, validationResult } = require("express-validator");
-require("dotenv").config();
-
-const isEmailInUse = async (value) => {
-    const user = await db.findUserByEmail(value);
-    if(user) throw new Error("E-Mail already in use.");
-    return true;
-};
-
-const isEmailMatching = async (value, { req }) => {
-    if(value !== req.body.email) throw new Error("E-Mails do not match.");
-    return true;
-};
-
-const isPasswordMatching = async (value, { req }) => {
-    if(value !== req.body.password) throw new Error("Passwords do not match.");
-    return true;
-};
-
-const isMembershipPassword = (value) => {
-    if(value !== process.env.MEMBER_SECRET) throw new Error("Wrong answer. Try again.");
-    return true;
-};
-
-const isAdminPassword = (value) => {
-    if(value !== process.env.ADMIN_SECRET) throw new Error("Wrong answer. Try again.");
-    return true;
-};
+const passport = require("../utils/passport.js");
+const { isEmailInUse, isEmailMatching, isPasswordMatching, isMembershipPassword, isAdminPassword, isCancelMembership, isCancelAdmin, isDeleteAccount } = require("../utils/validationHelper.js");
 
 const validateUser = [
     body("firstName").trim()
@@ -49,8 +24,20 @@ const validateMembership = [
     body("membershipPassword").trim().toLowerCase().custom(isMembershipPassword)
 ];
 
+const validateCancelMembership = [
+    body("cancelMember").trim().custom(isCancelMembership)
+];
+
 const validateAdmin = [
     body("adminPassword").trim().custom(isAdminPassword)
+];
+
+const validateCancelAdmin = [
+    body("cancelAdmin").trim().custom(isCancelAdmin)
+];
+
+const validateDeleteAccount = [
+    body("deleteAccount").trim().custom(isDeleteAccount)
 ];
 
 const userRegisterGet = (req, res) => res.render("pages/register");
@@ -90,7 +77,7 @@ const userMembershipPost = [
 ];
 
 const userAdminGet = (req, res) => {
-    if(!req.isAuthenticated()) res.redirect("auth/login");
+    if(!req.isAuthenticated()) res.redirect("/auth/login");
     if(req.user.status === "user") res.redirect("/user/membership");
     res.render("pages/admin");
 };
@@ -110,11 +97,105 @@ const userAdminPost = [
     }
 ];
 
+const cancelMembershipGet = async (req, res) => {
+    if(!req.isAuthenticated()) return res.redirect("/auth/login");
+    else if(req.user.status === "user") return res.redirect("/user/membership");
+    else if(req.user.status === "member" || req.user.status === "admin") {
+        return res.render("pages/cancel_membership");
+    }
+    else {
+        return res.redirect("/");
+    }
+};
+
+const cancelMembershipPost = [
+    validateCancelMembership,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) return res.status(400).render("pages/cancel_membership", { errors: errors.array() });
+    try {
+        await db.cancelMembership(req.user.id);
+        return res.redirect("/");
+    } catch (error) {
+        console.error("cancelMembershipPost:", error);
+        return res.status(500).send("Internal server error");
+        }
+    }
+];
+
+const cancelAdminGet = (req, res) => {
+if(!req.isAuthenticated()) return res.redirect("auth/login");
+        else if(req.user.status === "user") return res.redirect("/user/membership");
+        else if(req.user.status === "member") return res.redirect("/user/become-admin");
+        else if(req.user.status === "admin") {
+            return res.render("pages/cancel_admin");
+    }
+};
+
+const cancelAdminPost = [
+    validateCancelAdmin,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) return res.status(400).render("pages/cancel_admin", { errors: errors.array() });
+    try {
+        await db.cancelAdmin(req.user.id);
+        return res.redirect("/");
+    } catch (error) {
+        console.error("cancelAdminPost:", error);
+        return res.status(500).send("Internal server error");
+        }
+    }
+];
+
+const deleteAccountGet = (req, res) => {
+    if(!req.isAuthenticated()) return res.redirect("auth/login");
+    return res.render("pages/delete_account");
+};
+
+const deleteAccountPost = [
+    validateDeleteAccount,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) return res.status(400).render("pages/delete_account", { errors: errors.array() });
+    try {
+        await db.deleteAccount(req.user.id);
+        return res.redirect("/");
+    } catch (error) {
+        console.error("deleteAccountPost:", error);
+        return res.status(500).send("Internal server error");
+        }
+    }
+];
+
+const userLoginGet = (req, res) => res.render("pages/login");
+
+const userLoginPost = (req, res, next) => passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/auth/login"
+})(req, res, next);
+
+const userLogoutGet = (req, res, next) => {
+    req.logout((error) => {
+        if(error) return next(error);
+        res.redirect("/");
+    });
+};
+
+
 module.exports = {
     userRegisterGet,
     userRegisterPost,
     userMembershipGet,
     userMembershipPost,
     userAdminGet,
-    userAdminPost
+    userAdminPost,
+    cancelAdminGet,
+    cancelAdminPost,
+    deleteAccountGet,
+    deleteAccountPost,
+    userLoginGet,
+    userLoginPost,
+    userLogoutGet,
+    cancelMembershipGet,
+    cancelMembershipPost
 };

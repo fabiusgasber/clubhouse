@@ -1,0 +1,21 @@
+<%- include("../partials/head.ejs"); %>
+<body>
+    <%- include("../partials/header.ejs"); %>
+    <%- include("../partials/errors.ejs"); %>
+    <main>
+        <form method="post" action="/user/cancel-member">
+            <fieldset>
+                <legend>Cancel membership</legend>
+            <div>
+            <label for="cancelMember">Enter 'cancel' to cancel your account: (required)</label>
+            <input type="text" id="cancelMember" name="cancelMember" required>
+            </div>
+            </fieldset>
+            <div>
+                <a href="/">Cancel</a>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

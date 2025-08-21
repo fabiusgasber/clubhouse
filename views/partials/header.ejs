@@ -1,0 +1,24 @@
+<header>
+  <h1><a class="logo" href="/">Clubhouse</a></h1>
+  <nav>
+    <ul>
+        <% if(currentUser) { %>
+        <li><a href="/messages/new">Write new message</a></li>
+        <%   if(currentUser.status === "user") { %>
+        <li><a href="/user/membership">Become a member</a></li>
+        <%  } else if(currentUser.status === "member") { %>
+        <li><a href="/user/cancel-member">Cancel membership</a></li>
+        <li><a href="/user/become-admin">Become an admin</a></li>
+        <%  } else if(currentUser.status === "admin") { %>
+        <li><a href="/user/cancel-member">Cancel membership</a></li>
+        <li><a href="/user/cancel-admin">Cancel administratorship</a></li>
+        <%  } %>
+        <li><a href="/user/logout">Log out</a></li>
+        <li><a href="/user/delete">Delete account</a></li>
+        <% } else { %>
+        <li><a href="/user/login">Log in</a></li>
+        <li><a href="/user/register">Register</a></li>
+        <% } %>
+    </ul>
+  </nav>
+</header>

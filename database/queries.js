@@ -67,6 +67,30 @@ const getMessages = async () => {
     }
 };
 
+const cancelMembership = async (id) => {
+    try {
+        await pool.query("UPDATE users SET status = 'user' WHERE id = $1", [id]);
+    } catch (error) {
+        throw new Error (`cancelMembership: ${error.message}`);
+    }
+};
+
+const cancelAdmin = async (id) => {
+    try {
+        await pool.query("UPDATE users SET status = 'member' WHERE id = $1", [id]);
+    } catch (error) {
+        throw new Error (`cancelAdmin: ${error.message}`);
+    }
+};
+
+const deleteAccount = async (id) => {
+    try {
+        await pool.query("DELETE FROM users WHERE id = $1", [id]);
+    } catch (error) {
+        throw new Error (`deleteAccount: ${error.message}`);
+    }
+};
+
 module.exports = {
     findUserByEmail,
     findUserById,
@@ -74,5 +98,8 @@ module.exports = {
     promoteToMember,
     addMessage,
     getMessages,
-    promoteToAdmin
+    promoteToAdmin,
+    cancelAdmin,
+    cancelMembership,
+    deleteAccount,
 };

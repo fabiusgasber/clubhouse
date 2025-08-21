@@ -1,0 +1,21 @@
+<%- include("../partials/head.ejs"); %>
+<body>
+    <%- include("../partials/header.ejs"); %>
+    <%- include("../partials/errors.ejs"); %>
+    <main>
+        <form method="post" action="/user/cancel-admin">
+            <fieldset>
+                <legend>Cancel administratorship</legend>
+            <div>
+            <label for="cancelAdmin">Enter 'cancel admin' to cancel your administratorship: (required)</label>
+            <input type="text" id="cancelAdmin" name="cancelAdmin" required>
+            </div>
+            </fieldset>
+            <div>
+                <a href="/">Cancel</a>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
