@@ -2,12 +2,14 @@
 <body>
     <%- include("../partials/header.ejs"); %>
     <%- include("../partials/errors.ejs"); %>
-    <form method="post" action="/user/become-admin">
+    <main>
+        <form method="post" action="/user/become-admin">
         <div>
             <label for="adminPassword">Enter admin password:</label>
             <input type="password" id="adminPassword" name="adminPassword" required>
         </div>
         <button type="submit">Submit</button>
-    </form>
+        </form>
+    </main>
 </body>
 </html>

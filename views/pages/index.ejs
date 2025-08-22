@@ -1,23 +1,6 @@
 <%- include("../partials/head.ejs"); %>
 <body>
     <%- include("../partials/header.ejs"); %>
-    <% if(currentUser) { %>
-        <h1>Welcome back, <%= currentUser.first_name %> </h1>
-        <a href="/messages/new">Write new message</a>
-     <%   if(currentUser.status === "user") { %>
-          <a href="/user/membership">Become a member</a>
-      <%  } else if(currentUser.status === "member") { %>
-          <a href="/user/cancel-member">Cancel membership</a>
-          <a href="/user/become-admin">Become an admin</a>
-      <%  } else if(currentUser.status === "admin") { %>
-          <a href="/user/cancel-member">Cancel membership</a>
-          <a href="/user/cancel-admin">Cancel administratorship</a>
-    <%  } %>
-        <a href="/user/logout">Log out</a>
-        <a href="/user/delete-account">Delete account</a>
-   <% } else { %>
-    <h1>Please <a href="/user/login">log in</a> or <a href="/user/register">register</a></h1>
-  <% } %>
   <main>
     <%- include("../partials/messages.ejs", { messages }); %>
   </main>

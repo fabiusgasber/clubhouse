@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clubhouse</title>
-</head>
+<%- include("../partials/head.ejs"); %>
 <body>
+    <%- include("../partials/header.ejs"); %>
     <%- include("../partials/errors.ejs"); %>
+    <main>
     <form method="post" action="/user/membership">
         <div>
             <p>Which country won the men's soccer world cup in 2006?</p>
@@ -15,5 +11,6 @@
         </div>
         <button type="submit">Submit</button>
     </form>
+    </main>
 </body>
 </html>
