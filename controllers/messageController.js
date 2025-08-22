@@ -12,7 +12,7 @@ const validateMessage = [
 ];
 
 const newMessageGet = (req, res) => {
-    req.isAuthenticated() ? res.render("pages/add-message") : res.redirect("/auth/login");
+    req.isAuthenticated() ? res.render("pages/add-message") : res.redirect("/user/login");
 };
 
 const newMessagePost = [

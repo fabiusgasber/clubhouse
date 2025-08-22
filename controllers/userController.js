@@ -58,7 +58,7 @@ const userRegisterPost = [
 ];
 
 const userMembershipGet = (req, res, next) => {
-    req.isAuthenticated() ? res.render("pages/membership") : res.redirect("/auth/login");
+    req.isAuthenticated() ? res.render("pages/membership") : res.redirect("/user/login");
 };
 
 const userMembershipPost = [
@@ -77,7 +77,7 @@ const userMembershipPost = [
 ];
 
 const userAdminGet = (req, res) => {
-    if(!req.isAuthenticated()) res.redirect("/auth/login");
+    if(!req.isAuthenticated()) res.redirect("/user/login");
     if(req.user.status === "user") res.redirect("/user/membership");
     res.render("pages/admin");
 };
@@ -98,7 +98,7 @@ const userAdminPost = [
 ];
 
 const cancelMembershipGet = async (req, res) => {
-    if(!req.isAuthenticated()) return res.redirect("/auth/login");
+    if(!req.isAuthenticated()) return res.redirect("/user/login");
     else if(req.user.status === "user") return res.redirect("/user/membership");
     else if(req.user.status === "member" || req.user.status === "admin") {
         return res.render("pages/cancel_membership");
@@ -124,7 +124,7 @@ const cancelMembershipPost = [
 ];
 
 const cancelAdminGet = (req, res) => {
-if(!req.isAuthenticated()) return res.redirect("auth/login");
+if(!req.isAuthenticated()) return res.redirect("/user/login");
         else if(req.user.status === "user") return res.redirect("/user/membership");
         else if(req.user.status === "member") return res.redirect("/user/become-admin");
         else if(req.user.status === "admin") {
@@ -148,7 +148,7 @@ const cancelAdminPost = [
 ];
 
 const deleteAccountGet = (req, res) => {
-    if(!req.isAuthenticated()) return res.redirect("auth/login");
+    if(!req.isAuthenticated()) return res.redirect("/user/login");
     return res.render("pages/delete_account");
 };
 
@@ -171,7 +171,8 @@ const userLoginGet = (req, res) => res.render("pages/login");
 
 const userLoginPost = (req, res, next) => passport.authenticate("local", {
   successRedirect: "/",
-  failureRedirect: "/auth/login"
+  failureRedirect: "/user/login",
+  failureMessage: true
 })(req, res, next);
 
 const userLogoutGet = (req, res, next) => {

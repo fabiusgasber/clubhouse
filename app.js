@@ -29,9 +29,14 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-app.use("/", indexRouter);
+app.use((req, res, next) => {
+  res.locals.messages = req.session.messages || [];
+  req.session.messages = [];
+  next();
+});
 app.use("/user", userRouter);
 app.use("/messages", messageRouter);
+app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
