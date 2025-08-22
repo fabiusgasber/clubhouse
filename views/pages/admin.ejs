@@ -3,13 +3,7 @@
     <%- include("../partials/header.ejs"); %>
     <%- include("../partials/errors.ejs"); %>
     <main>
-        <form method="post" action="/user/become-admin">
-        <div>
-            <label for="adminPassword">Enter admin password:</label>
-            <input type="password" id="adminPassword" name="adminPassword" required>
-        </div>
-        <button type="submit">Submit</button>
-        </form>
+        <%- include("../partials/admin_form.ejs"); %>
     </main>
 </body>
 </html>

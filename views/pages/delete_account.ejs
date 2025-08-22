@@ -3,19 +3,7 @@
     <%- include("../partials/header.ejs"); %>
     <%- include("../partials/errors.ejs"); %>
     <main>
-        <form method="post" action="/user/delete">
-            <fieldset>
-                <legend>Delete account</legend>
-            <div>
-            <label for="deleteAccount">Enter 'delete' to delete your account: (required)</label>
-            <input type="text" id="deleteAccount" name="deleteAccount" required>
-            </div>
-            </fieldset>
-            <div>
-                <a href="/">Cancel</a>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+        <%- include("../partials/delete_account_form.ejs"); %>
     </main>
 </body>
 </html>

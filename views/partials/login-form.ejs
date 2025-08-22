@@ -1,12 +1,18 @@
 <%- include("./errors.ejs") %>
 <form method="post" action="/user/login">
-    <section>
-        <label for="email">User E-Mail</label>
+    <fieldset>
+        <legend>Log in</legend>
+        <div>
+        <label for="email">E-Mail (required)</label>
         <input type="email" id="email" name="email" min="3" max="50" required>
-    </section>
-    <section>
-        <label for="password">User Password</label>
+        </div>
+    <div>
+        <label for="password">Password (required)</label>
         <input type="password" id="password" name="password" min="5" required>
-    </section>
-    <button type="submit">Submit</button>
+    </div>
+    </fieldset>
+    <div>
+        <button type="submit">Submit</button>
+        <a href="/">Cancel</a>
+    </div>
 </form>

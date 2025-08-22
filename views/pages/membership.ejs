@@ -3,14 +3,8 @@
     <%- include("../partials/header.ejs"); %>
     <%- include("../partials/errors.ejs"); %>
     <main>
-    <form method="post" action="/user/membership">
-        <div>
-            <p>Which country won the men's soccer world cup in 2006?</p>
-            <label for="membershipPassword">Submit your answer to become a member: </label>
-            <input type="password" id="membershipPassword" name="membershipPassword" required>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+    <h2>Become a member</h2>
+    <%- include("../partials/member_form.ejs"); %>
     </main>
 </body>
 </html>
