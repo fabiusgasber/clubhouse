@@ -37,22 +37,5 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-const userLoginGet = (req, res) => res.render("pages/login");
 
-const userLoginPost = (req, res, next) => passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login"
-})(req, res, next);
-
-const userLogoutGet = (req, res, next) => {
-    req.logout((error) => {
-        if(error) return next(error);
-        res.redirect("/");
-    });
-};
-
-module.exports = {
-    userLoginGet,
-    userLoginPost,
-    userLogoutGet
-};
+module.exports = passport;

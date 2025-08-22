@@ -3,10 +3,11 @@ const userRouter = Router();
 const userController = require("../controllers/userController");
 
 
-userRouter.get("/register", userController.userRegisterGet);
-userRouter.post("/register", userController.userRegisterPost);
 userRouter.get("/login", userController.userLoginGet);
 userRouter.post("/login", userController.userLoginPost);
+userRouter.get("/logout", userController.userLogoutGet);
+userRouter.get("/register", userController.userRegisterGet);
+userRouter.post("/register", userController.userRegisterPost);
 userRouter.get("/logout", userController.userLogoutGet);
 userRouter.get("/membership", userController.userMembershipGet);
 userRouter.post("/membership", userController.userMembershipPost);
