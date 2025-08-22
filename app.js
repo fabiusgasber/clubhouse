@@ -8,6 +8,7 @@ const indexRouter = require("./routes/indexRouter.js");
 const userRouter = require("./routes/userRouter.js");
 const messageRouter = require("./routes/messageRouter.js");
 const pool = require("./database/pool.js");
+const CustomDbError = require("./errors/CustomDbError.js");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -37,6 +38,15 @@ app.use((req, res, next) => {
 app.use("/user", userRouter);
 app.use("/messages", messageRouter);
 app.use("/", indexRouter);
+app.use((err, req, res, next) => {
+  if(err instanceof CustomDbError){
+    console.error("DB error:", err.originalError);
+  }
+  else {
+    console.error(err.stack || err);
+  }
+  return res.status(err.statusCode || 500).send(err.message || "Internal server error");
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {

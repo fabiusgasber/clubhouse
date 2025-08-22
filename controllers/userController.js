@@ -47,13 +47,8 @@ const userRegisterPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/register", { errors: errors.array() });
-        try {
-            await db.addUser(req.body);
-            return res.redirect("/user/login");
-        } catch (error) {
-            console.error("userRegisterPost error:", error);
-            return res.status(500).send("Internal server error");
-        }
+        await db.addUser(req.body);
+        return res.redirect("/user/login");
     }
 ];
 
@@ -66,20 +61,15 @@ const userMembershipPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/membership", { errors: errors.array() });
-        try {
-            await db.promoteToMember(req.user.id);
-            res.redirect("/");
-        } catch (error) {
-            console.error("userMembershipPost:", error);
-            res.status(500).send("Internal server error");
-        }
+        await db.promoteToMember(req.user.id);
+        return res.redirect("/");
     }
 ];
 
 const userAdminGet = (req, res) => {
     if(!req.isAuthenticated()) res.redirect("/user/login");
     if(req.user.status === "user") res.redirect("/user/membership");
-    res.render("pages/admin");
+    return res.render("pages/admin");
 };
 
 const userAdminPost = [
@@ -87,13 +77,8 @@ const userAdminPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/admin", { errors: errors.array() });
-        try {
-            await db.promoteToAdmin(req.user.id);
-            res.redirect("/");
-        } catch (error) {
-            console.error("userAdminPost:", error);
-            res.status(500).send("Internal server error");
-        }
+        await db.promoteToAdmin(req.user.id);
+        return res.redirect("/");
     }
 ];
 
@@ -113,13 +98,8 @@ const cancelMembershipPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/cancel_membership", { errors: errors.array() });
-    try {
         await db.cancelMembership(req.user.id);
         return res.redirect("/");
-    } catch (error) {
-        console.error("cancelMembershipPost:", error);
-        return res.status(500).send("Internal server error");
-        }
     }
 ];
 
@@ -137,13 +117,8 @@ const cancelAdminPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/cancel_admin", { errors: errors.array() });
-    try {
         await db.cancelAdmin(req.user.id);
         return res.redirect("/");
-    } catch (error) {
-        console.error("cancelAdminPost:", error);
-        return res.status(500).send("Internal server error");
-        }
     }
 ];
 
@@ -157,13 +132,8 @@ const deleteAccountPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) return res.status(400).render("pages/delete_account", { errors: errors.array() });
-    try {
         await db.deleteAccount(req.user.id);
         return res.redirect("/");
-    } catch (error) {
-        console.error("deleteAccountPost:", error);
-        return res.status(500).send("Internal server error");
-        }
     }
 ];
 
@@ -178,7 +148,7 @@ const userLoginPost = (req, res, next) => passport.authenticate("local", {
 const userLogoutGet = (req, res, next) => {
     req.logout((error) => {
         if(error) return next(error);
-        res.redirect("/");
+        return res.redirect("/");
     });
 };
 

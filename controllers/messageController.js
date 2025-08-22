@@ -20,14 +20,9 @@ const newMessagePost = [
     async (req, res) => {
             const errors = validationResult(req);
             if(!errors.isEmpty()) return res.status(400).render("pages/add-message", { errors: errors.array() });
-        try {
             const { title, message } = req.body;
             await db.addMessage(req.user.id, title, message);
             res.redirect("/");
-        } catch (error) {
-            console.error("newMessagePost: ", error);
-            res.status(500).send("Internal server error");
-        }
     }
 ];
 
