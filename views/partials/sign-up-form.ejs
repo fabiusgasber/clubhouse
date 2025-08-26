@@ -1,16 +1,19 @@
 <%- include("./errors.ejs") %>
-<form method="post" action="/user/register">
+<form method="post" action="/user/register" id="register-form">
     <fieldset>
         <legend>Register</legend>
         <div>
-        <label for="firstName">First name (required)</label>
-        <input type="text" id="firstName" name="firstName" minlength="1" maxlength="20"  required>
-    </div>
+        <div>
+            <label for="firstName">First name (required)</label>
+            <input type="text" id="firstName" name="firstName" minlength="1" maxlength="20"  required>
+        </div>
     <div>
         <label for="lastName">Last name (required)</label>
         <input type="text" id="lastName" name="lastName" minlength="1" maxlength="20" required>
-    </div>
-    <div>
+    </div>  
+        </div>
+        <div>
+<div>
         <label for="email">E-Mail (required)</label>
         <input type="email" id="email" name="email" minlength="3" maxlength="50" required>
     </div>
@@ -18,7 +21,9 @@
         <label for="confirmEmail">Confirm E-Mail (required)</label>
         <input type="email" id="confirmEmail" name="confirmEmail" minlength="3" maxlength="50" required>
     </div>
+        </div>
     <div>
+<div>
         <label for="password">Password (required)</label>
         <input type="password" id="password" name="password" minlength="5" required>
     </div>
@@ -26,8 +31,10 @@
         <label for="confirmPassword">Confirm Password (required)</label>
         <input type="password" id="confirmPassword" name="confirmPassword" minlength="5" required>
     </div>
+    </div>
+    
     </fieldset>
-    <div>
+    <div class="button-container">
         <button type="submit">Submit</button>
         <a href="/">Cancel</a>
     </div>

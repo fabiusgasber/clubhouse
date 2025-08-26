@@ -1,5 +1,5 @@
 <% if(messages && messages.length) { %>
-    <ul>
+    <ul class="errors">
     <% messages.forEach((message) => { %>
       <li><%= message %></li>
     <% }); %>
@@ -17,7 +17,7 @@
         <input type="password" id="password" name="password" min="5" required>
     </div>
     </fieldset>
-    <div>
+    <div class="button-container">
         <button type="submit">Submit</button>
         <a href="/">Cancel</a>
     </div>

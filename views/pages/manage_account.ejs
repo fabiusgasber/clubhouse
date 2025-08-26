@@ -1,0 +1,23 @@
+<%- include("../partials/head.ejs"); %>
+<body>
+    <%- include("../partials/header.ejs"); %>
+    <main>
+        <h2>Manage your account</h2>
+        <ul class="account-list">
+        <% if(currentUser) { %>
+        <%   if(currentUser.status === "user") { %>
+        <li><a href="/user/membership">Become a member</a></li>
+        <%  } else if(currentUser.status === "member") { %>
+        <li><a href="/user/cancel-member">Cancel membership</a></li>
+        <li><a href="/user/become-admin">Become an admin</a></li>
+        <%  } else if(currentUser.status === "admin") { %>
+        <li><a href="/user/cancel-member">Cancel membership</a></li>
+        <li><a href="/user/cancel-admin">Cancel administratorship</a></li>
+        <%  } %>
+        <li><a href="/user/logout">Log out</a></li>
+        <li><a href="/user/delete">Delete account</a></li>
+        <% } %>
+        </ul>
+    </main>
+</body>
+</html>

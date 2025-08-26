@@ -1,13 +1,11 @@
 <article>
         <div>
             <h2><%= message.title %></h2>
-            <span><%= new Date(message.timestamp).toLocaleString() %></span>
-        </div>
-        <div>
-            <p><%= message.first_name %> says: </p>
             <p><%= message.text %></p>
         </div>
-        <form method="post" action="/messages/delete/<%= message.id %>">
-            <button type="submit">Delete message</button>
-        </form>
+        <div class="message-meta">
+            <p><%= message.first_name %></p>
+            <span><%= new Date(message.timestamp).toLocaleString() %></span>
+        </div>
+            <a href="/messages/delete/<%= message.id %>"><img src="/trash-can.png" alt="trash can" width="25px" height="25px"></a>
 </article>

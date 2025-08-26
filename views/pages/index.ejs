@@ -2,8 +2,13 @@
 <body>
     <%- include("../partials/header.ejs"); %>
   <main>
-    <h2>Messages</h2>
-    <%- include("../partials/messages.ejs", { messages }); %>
+    <% if(currentUser) { %>
+      <h2>Welcome, <%= currentUser.first_name %></h2>
+    <% } %> 
+    <h3>Messages</h3>
+    <div class="message-container">
+        <%- include("../partials/messages.ejs", { messages }); %>
+    </div>
   </main>
 </body>
 </html>

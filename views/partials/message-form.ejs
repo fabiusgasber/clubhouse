@@ -1,17 +1,17 @@
 <%- include("./errors.ejs") %>
 <form method="post" action="/messages/new">
     <fieldset>
-        <legend>Add your message to the clubhouse</legend>
+        <legend>Add your message</legend>
         <div>
         <label for="title">Title (required)</label>
         <input type="text" id="title" name="title" min="2" max="20" required>
         </div>
     <div>
         <label for="message">Message (required)</label>
-        <textarea id="message" name="message" minlength="2" maxlength="250" required></textarea>
+        <textarea id="message" name="message" rows="5" cols="20" minlength="2" maxlength="250" required></textarea>
     </div>
     </fieldset>
-    <div>
+    <div class="button-container">
         <button type="submit">Submit</button>
         <a href="/">Cancel</a>
     </div>

@@ -13,7 +13,7 @@ const CustomDbError = require("./errors/CustomDbError.js");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded( { extended: true }));
-app.use("/static", express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(session({ 
     secret: process.env.COOKIE_SECRET, 
     resave: false, 
