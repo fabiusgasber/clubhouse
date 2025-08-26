@@ -64,7 +64,7 @@ const addMessage = async (userId, title, message) => {
 const getMessages = async () => {
     try {
         const { rows } = await pool.query(
-            `SELECT first_name, last_name, title, text, timestamp 
+            `SELECT first_name, last_name, title, text, timestamp, messages.id 
             FROM users 
             JOIN messages ON(users.id=messages.user_id)
             ORDER BY messages.timestamp DESC;`
@@ -99,6 +99,14 @@ const deleteAccount = async (id) => {
     }
 };
 
+const deleteMessage = async (id) => {
+    try {
+        await pool.query("DELETE FROM messages WHERE id = $1", [id]);
+    } catch (error) {
+        throw new CustomDbError("could not delete message from database", error);
+    }
+};
+
 module.exports = {
     findUserByEmail,
     findUserById,
@@ -110,4 +118,5 @@ module.exports = {
     cancelAdmin,
     cancelMembership,
     deleteAccount,
+    deleteMessage
 };
