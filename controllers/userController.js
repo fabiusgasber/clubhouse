@@ -152,6 +152,13 @@ const userLogoutGet = (req, res, next) => {
     });
 };
 
+const manageAccount = (req, res) => { 
+    if (req.user.status === "user" || req.user.status === "member" || req.user.status === "admin"){
+        return res.render("pages/manage_account");
+    }
+    else return res.redirect("/user/login");
+};
+
 
 module.exports = {
     userRegisterGet,
@@ -168,5 +175,6 @@ module.exports = {
     userLoginPost,
     userLogoutGet,
     cancelMembershipGet,
-    cancelMembershipPost
+    cancelMembershipPost,
+    manageAccount
 };

@@ -19,6 +19,7 @@ userRouter.get("/cancel-admin", userController.cancelAdminGet);
 userRouter.post("/cancel-admin", userController.cancelAdminPost);
 userRouter.get("/delete", userController.deleteAccountGet);
 userRouter.post("/delete", userController.deleteAccountPost);
+userRouter.get("/manage-account", userController.manageAccount);
 
 
 module.exports = userRouter;
