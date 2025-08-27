@@ -34,8 +34,12 @@ const newMessagePost = [
 ];
 
 const deleteMessage = async (req, res) => {
-  await db.deleteMessage(req.params.id);
-  res.redirect("/");
+  if (!req.isAuthenticated() || req.user.status !== "admin")
+    return res.redirect("/user/login");
+  else if (req.user.status === "admin") {
+    await db.deleteMessage(req.params.id);
+    return res.redirect("/");
+  }
 };
 
 module.exports = {
