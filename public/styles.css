@@ -1,59 +1,74 @@
 @font-face {
-    font-family: montserrat;
-    src: url(/Montserrat-VariableFont_wght.ttf);
+  font-family: montserrat;
+  src: url(/Montserrat-VariableFont_wght.ttf);
 }
 
-* { /* Simple resets */
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
-    padding-block-start: 0;
-    padding-block-end: 0;
-    appearance: none;
-    background-color: unset;
-    border: none;
-    list-style-type: none;
+* {
+  /* Simple resets */
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  appearance: none;
+  background-color: unset;
+  border: none;
+  list-style-type: none;
 }
 
 body {
-    font-family: montserrat, monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --gap: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-    background-color: #1f2937;
-    color: #e0e0e0;
+  font-family:
+    montserrat,
+    monospace,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  --gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #1f2937;
+  color: #e0e0e0;
 }
 
-button, input, textarea {
-    font-size: 100%;
-    color: #fff;
-    font-family: inherit;
+button,
+input,
+textarea {
+  font-size: 100%;
+  color: #fff;
+  font-family: inherit;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 #logo-container {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-#logo-container>img{
-    object-fit: contain;
+#logo-container > img {
+  object-fit: contain;
 }
 
 .logo {
@@ -65,181 +80,191 @@ header {
 }
 
 a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 }
 
 h2 {
-    color: #51b34c;
+  color: #51b34c;
 }
 
 label {
-    float: left;
-    width: 250px;
-    text-align: center;
-    line-height: 1.5rem;
+  float: left;
+  width: 250px;
+  text-align: center;
+  line-height: 1.5rem;
 }
 
 article {
-    display: flex;
-    background-color: #2d3748;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #51b34c;
-    padding: 12px;
-    gap: 20px;
-    border-radius: 12px;
-    transition: box-shadow 0.2s ease;
-    word-break: break-all;
-    width: calc(10vw + 200px);
+  display: flex;
+  background-color: #2d3748;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #51b34c;
+  padding: 12px;
+  gap: 20px;
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease;
+  word-break: break-all;
+  width: calc(10vw + 200px);
 }
 
 article:hover {
-    box-shadow: 0 6px 18px #51b34c;
+  box-shadow: 0 6px 18px #51b34c;
 }
 
 article div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 fieldset {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: center;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 2rem;
 }
 
 fieldset div {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
 }
 
 legend {
-    margin-bottom: 30px;
-    font-weight: bold;
-    text-align: center;
-    color: #51b34c;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #51b34c;
 }
 
-input, textarea {
-    border: 2px solid white;
+input,
+textarea {
+  border: 2px solid white;
 }
 
 textarea {
-    height: auto;
-    padding: 5px;
+  height: auto;
+  padding: 5px;
 }
 
-input:focus, textarea:focus {
-    border-color: #51b34c;
+input:focus,
+textarea:focus {
+  border-color: #51b34c;
 }
 
-nav>ul {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+nav > ul {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-nav li a, form a, button, .account-list li {
-    position: relative;
+nav li a,
+form a,
+button,
+.account-list li {
+  position: relative;
 }
 
-nav li a::after, form a::after, button::after, .account-list li::after {
-    content: "";
-    position: absolute;
-    background-color: #51b34c;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    width: 0;
-    transition: width ease-in-out 0.2s;
+nav li a::after,
+form a::after,
+button::after,
+.account-list li::after {
+  content: "";
+  position: absolute;
+  background-color: #51b34c;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 0;
+  transition: width ease-in-out 0.2s;
 }
 
-nav li a:hover::after, form a:hover::after, button:hover::after, .account-list li:hover::after {
-    width: 100%;
+nav li a:hover::after,
+form a:hover::after,
+button:hover::after,
+.account-list li:hover::after {
+  width: 100%;
 }
 
 .title {
-    color: #51b34c;
+  color: #51b34c;
 }
 
 .message-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .message-meta {
-    font-size: 0.7rem;
-    flex-direction: row;
+  font-size: 0.7rem;
+  flex-direction: row;
 }
 
 .button-container {
-    display: flex;
-    gap: 3rem;
+  display: flex;
+  gap: 3rem;
 }
 
 .errors {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: red;
 }
 
 .errors li {
-    list-style-type: square;
+  list-style-type: square;
 }
 
 .account-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
-
-
 @media (max-width: 800px) {
-    #logo-container>img {
-        width: 50px;
-        height: auto;
-    }
-    .logo {
-        font-size: 2rem;
-    }
-    header {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-    }
-    nav ul, fieldset div {
-        justify-content: center;
-    }
-    fieldset div{
-        gap: 1.5rem;
-    }
+  #logo-container > img {
+    width: 50px;
+    height: auto;
+  }
+  .logo {
+    font-size: 2rem;
+  }
+  header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  nav ul,
+  fieldset div {
+    justify-content: center;
+  }
+  fieldset div {
+    gap: 1.5rem;
+  }
 }

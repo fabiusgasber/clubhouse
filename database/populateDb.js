@@ -23,12 +23,14 @@ user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 `;
 
 const main = async () => {
-    console.log("...seeding");
-    const client = new Client({ connectionString: process.env.DATABASE_CONNECTION });
-    await client.connect();
-    await client.query(SQL);
-    await client.end();
-    console.log("done");
+  console.log("...seeding");
+  const client = new Client({
+    connectionString: process.env.DATABASE_CONNECTION,
+  });
+  await client.connect();
+  await client.query(SQL);
+  await client.end();
+  console.log("done");
 };
 
 main();

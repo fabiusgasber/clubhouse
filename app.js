@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const session = require("express-session");
-const pgSession = require('connect-pg-simple')(session);
+const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 const indexRouter = require("./routes/indexRouter.js");
 const userRouter = require("./routes/userRouter.js");
@@ -12,19 +12,21 @@ const CustomDbError = require("./errors/CustomDbError.js");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.urlencoded( { extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session({ 
-    secret: process.env.COOKIE_SECRET, 
-    resave: false, 
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
     saveUninitialized: false,
-    store:  new pgSession({
-        pool,
-        tableName: "user_sessions",
-        createTableIfMissing: true
+    store: new pgSession({
+      pool,
+      tableName: "user_sessions",
+      createTableIfMissing: true,
     }),
-    cookie: { maxAge: 10 * 24 * 60 * 60 * 1000 } // 10 days
-}));
+    cookie: { maxAge: 10 * 24 * 60 * 60 * 1000 }, // 10 days
+  }),
+);
 app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
@@ -39,17 +41,18 @@ app.use("/user", userRouter);
 app.use("/messages", messageRouter);
 app.use("/", indexRouter);
 app.use((err, req, res, next) => {
-  if(err instanceof CustomDbError){
+  if (err instanceof CustomDbError) {
     console.error("DB error:", err.originalError);
-  }
-  else {
+  } else {
     console.error(err.stack || err);
   }
-  return res.status(err.statusCode || 500).send(err.message || "Internal server error");
+  return res
+    .status(err.statusCode || 500)
+    .send(err.message || "Internal server error");
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
-    if(err) throw err;
-    console.log(`Express app listening on port ${PORT}`);
-})
+  if (err) throw err;
+  console.log(`Express app listening on port ${PORT}`);
+});
