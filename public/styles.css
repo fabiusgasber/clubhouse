@@ -113,8 +113,9 @@ article {
   gap: 20px;
   border-radius: 12px;
   transition: box-shadow 0.2s ease;
-  word-break: break-all;
+  overflow-wrap: break-word;
   width: calc(10vw + 200px);
+  text-align: center;
 }
 
 article:hover {
