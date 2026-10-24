@@ -1,6 +1,6 @@
 # Clubhouse
 
-🔗 [Live Preview]([https://clubhouse-production-5a3f.up.railway.app])
+🔗 [Live Preview](https://clubhouse-production-5a3f.up.railway.app)
 
 ## Introduction
 This project is part of **The Odin Project** curriculum. The goal is to build an exclusive clubhouse where members can create and share posts. 
