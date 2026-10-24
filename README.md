@@ -1,6 +1,6 @@
 # Clubhouse
 
-🔗 [Live Preview](https://fiscal-xaviera-fagacodes-2438f922.koyeb.app)
+🔗 [Live Preview]([https://fiscal-xaviera-fagacodes-2438f922.koyeb.app](https://clubhouse-production-5a3f.up.railway.app))
 
 ## Introduction
 This project is part of **The Odin Project** curriculum. The goal is to build an exclusive clubhouse where members can create and share posts. 
